@@ -2,39 +2,60 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Invitación VIP 3er Aniversario - Kaypi Plaza</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
     <style>
-        /* ==================== RESET ABSOLUTO ==================== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* ==================== RESET Y FONDOS ==================== */
         body, html {
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
+            margin: 0; padding: 0;
+            background-color: #050505;
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
         }
 
-        /* ==================== 1. FONDO GLOBAL ==================== */
-        .global-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0; 
-            background-image: linear-gradient(rgba(10, 0, 0, 0.6), rgba(30, 0, 5, 0.8)), 
+        .phone-container {
+            width: 100%; max-width: 420px;
+            height: 100vh; max-height: 850px;
+            position: relative;
+            overflow-y: auto; overflow-x: hidden;
+            box-sizing: border-box;
+            
+            /* ======== IMAGEN DE FONDO ACTUALIZADA ======== */
+            background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
                               url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
-            background-size: cover; background-position: center;
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
 
-        /* ==================== 2. PARTÍCULAS ==================== */
+        @media (min-width: 450px) {
+            .phone-container {
+                height: 90vh; border-radius: 40px;
+                border: 12px solid #111;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 30px rgba(255,255,255,0.05);
+            }
+        }
+        .phone-container::-webkit-scrollbar { display: none; }
+
+        /* ==================== EFECTO DE NIEVE DE COLORES (FONDO) ==================== */
         .particles-container {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 1; 
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1; /* Por debajo de todo el contenido */
+            overflow: hidden;
         }
 
-        .particle { position: absolute; background-color: rgba(212, 175, 55, 0.8); border-radius: 50%; animation: fall 10s linear infinite; }
+        .particle {
+            position: absolute;
+            background-color: rgba(212, 175, 55, 0.8);
+            border-radius: 50%;
+            animation: fall 10s linear infinite;
+        }
+
+        /* Variables CSS para aleatoriedad sin JS */
         .particle:nth-of-type(1) { width: 3px; height: 3px; left: 10%; animation-delay: 0s; background-color: #FFE066; }
         .particle:nth-of-type(2) { width: 2px; height: 2px; left: 20%; animation-delay: 1s; background-color: #D4AF37; }
         .particle:nth-of-type(3) { width: 4px; height: 4px; left: 30%; animation-delay: 2s; background-color: #FFC04D; }
@@ -45,143 +66,133 @@
         .particle:nth-of-type(8) { width: 1.5px; height: 1.5px; left: 80%; animation-delay: 7s; background-color: #D4AF37; }
         .particle:nth-of-type(9) { width: 3px; height: 3px; left: 90%; animation-delay: 8s; background-color: #FFC04D; }
         .particle:nth-of-type(10) { width: 2px; height: 2px; left: 15%; animation-delay: 9s; background-color: #FFE066; }
+        /* Repetir para más densidad si lo deseas */
         
-        @keyframes fall { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(100vh); opacity: 0.6; } }
-
-        /* ==================== 3. PANTALLA DE INICIO (AUDIO) ==================== */
-        #welcomeOverlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.6s ease; cursor: pointer;
+        @keyframes fall {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(100vh); opacity: 0.6; }
         }
 
-        .tap-circle {
-            width: 80px; height: 80px; border-radius: 50%; background: rgba(212, 175, 55, 0.2);
-            border: 2px solid #D4AF37; display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px; animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
-            70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
-
-        #welcomeOverlay p { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
-
-        /* ==================== 4. CONTENEDOR PRINCIPAL EXPANSIVO ==================== */
-        .main-wrapper {
-            position: relative; z-index: 2; 
-            width: 100%; /* Forzamos el 100% */
-            min-height: 100vh;
-            padding: 15px 12px; /* Margen exterior muy fino para que ocupe todo */
-            display: flex; flex-direction: column;
-        }
-
-        /* Solo limitamos el ancho si es una pantalla gigante de computadora */
-        @media (min-width: 1024px) {
-            .main-wrapper { max-width: 600px; margin: 0 auto; padding: 30px; }
-        }
-
-        /* MARCO INTERNO (Abarca todo el ancho disponible) */
+        /* ==================== MARCO ORNAMENTAL Y CONTENIDO ==================== */
         .inner-frame {
-            position: relative; flex-grow: 1; 
-            width: 100%; /* Ahora sí ocupa todo el espacio */
-            padding: 40px 15px; /* Más espacio vertical, menos horizontal */
+            position: relative;
+            margin: 20px; padding: 45px 25px;
+            min-height: calc(100% - 40px);
+            box-sizing: border-box;
             text-align: center;
-            background: rgba(5, 0, 0, 0.45); 
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: radial-gradient(circle at top, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            z-index: 2; /* Por encima de la nieve */
         }
 
-        /* Esquinas doradas empujadas a los bordes */
-        .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.8; pointer-events: none; }
+        /* Detalles de las esquinas doradas */
+        .inner-frame::before, .inner-frame::after {
+            content: ''; position: absolute;
+            width: 40px; height: 40px;
+            border-color: #D4AF37; border-style: solid;
+            opacity: 0.7; pointer-events: none;
+        }
         .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
         .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
-        .corner-tr, .corner-bl { position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.8; pointer-events: none; }
+
+        .corner-tr, .corner-bl { position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .corner-tr { top: 15px; right: 15px; border-width: 2px 2px 0 0; }
         .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 2px 2px; }
 
-        /* ==================== LOGO EMPRESA ==================== */
-        .logo-empresa {
-            width: 110px; height: 110px; margin: 0 auto 20px auto; display: block;
-            border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37;
-            background-color: #ffffff; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        /* ==================== BOTÓN DE MÚSICA ==================== */
-        .music-toggle {
-            position: absolute; top: 25px; right: 25px;
-            width: 45px; height: 45px; border-radius: 50%;
-            background: rgba(15, 5, 5, 0.85); border: 1px solid rgba(212, 175, 55, 0.6);
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer; z-index: 99; backdrop-filter: blur(5px);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-        .music-icon { width: 22px; height: 22px; fill: #D4AF37; }
-
-        /* ==================== TIPOGRAFÍA (MÁS GRANDE Y PROPORCIONADA) ==================== */
+        /* ==================== TIPOGRAFÍA Y BRILLOS MEJORADOS ==================== */
+        /* Oro Estático Rico (Sin barrido de luz) */
         .gold-text {
             background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            color: transparent; -webkit-background-clip: text; background-clip: text;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
             filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
+            text-shadow: 0px 4px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .header-text { font-size: 0.85rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #ccc; margin-bottom: 10px; }
-        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800; margin: 0; letter-spacing: 2px; line-height: 1.1; }
-        .number-main { font-family: 'Playfair Display', serif; font-size: 10rem; font-weight: 800; margin: 10px 0; line-height: 1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
-        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 10px; }
-        .subtitle-text { font-size: 1rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 35px; }
+        .header-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
+        
+        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 800; margin: 0; letter-spacing: 3px; filter: drop-shadow(0 4px 10px rgba(212,175,55,0.3)); }
+        
+        .number-main { font-family: 'Playfair Display', serif; font-size: 9rem; font-weight: 800; margin: 5px 0; line-height: 1.1; filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.4)); }
+        
+        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 5px; margin-bottom: 10px; }
+        
+        .subtitle-text { font-size: 0.9rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 35px; opacity: 0.9; }
 
-        /* ==================== TARJETA DE DETALLES (ANCHO COMPLETO) ==================== */
+        /* ==================== TARJETA DE DETALLES PREMIUM (Glassmorphism sutil) ==================== */
         .glass-card {
-            width: 100%; /* Forzamos a que llene la pantalla a lo ancho */
             background: rgba(15, 5, 5, 0.5);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.25); 
-            border-radius: 18px; padding: 30px 20px; margin-bottom: 30px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2); /* Borde sutil */
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
         }
 
-        .glass-card p { font-size: 1rem; line-height: 1.6; color: #ddd; margin: 0 0 30px 0; font-weight: 300; }
-        .detail-row { display: flex; align-items: center; margin-bottom: 25px; text-align: left; }
+        .glass-card p { font-size: 0.85rem; line-height: 1.8; color: #ddd; margin: 0 0 30px 0; font-weight: 300; }
+
+        .detail-row {
+            display: flex; align-items: center;
+            margin-bottom: 20px; text-align: left;
+        }
         .detail-row:last-child { margin-bottom: 0; }
 
         .icon-circle {
-            width: 48px; height: 48px; min-width: 48px;
-            border-radius: 50%; background: rgba(212, 175, 55, 0.08);
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.05);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            display: flex; justify-content: center; align-items: center; margin-right: 18px;
+            display: flex; justify-content: center; align-items: center;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
         }
-        .icon-svg { width: 24px; height: 24px; fill: url(#goldGradient); }
 
-        .detail-info h4 { margin: 0; font-size: 0.8rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
-        .detail-info span { font-size: 1.1rem; font-weight: 600; color: #fff; display: block; margin-top: 4px; }
-        .detail-info .sub-text { font-size: 0.85rem; font-weight: 300; color: #aaa; }
+        .icon-svg { width: 22px; height: 22px; fill: url(#goldGradient); }
 
-        /* ==================== MAPA, BOTONES Y FIRMA ==================== */
-        .map-container { margin-bottom: 25px; width: 100%; }
-        .map-image { width: 100%; height: 180px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.4); margin-bottom: 15px; display: none; }
+        .detail-info h4 { margin: 0; font-size: 0.65rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
+        .detail-info span { font-size: 0.95rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
+        .detail-info .sub-text { font-size: 0.75rem; font-weight: 300; color: #aaa; }
+
+        /* ==================== MAPA Y BOTONES ==================== */
+        .map-container { margin-bottom: 35px; width: 100%; }
+        
+        .map-image {
+            width: 100%; height: 160px; object-fit: cover;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            margin-bottom: 15px;
+            display: none;
+        }
 
         .btn {
             display: flex; justify-content: center; align-items: center;
-            width: 100%; /* Estiramos los botones de extremo a extremo */
-            padding: 20px 0; border-radius: 35px;
-            font-weight: 600; text-transform: uppercase; font-size: 0.95rem;
-            letter-spacing: 2px; text-decoration: none; margin-bottom: 18px;
-            transition: all 0.3s ease;
+            width: 100%; padding: 16px 0; border-radius: 30px;
+            font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
+            letter-spacing: 2px; text-decoration: none; transition: all 0.4s ease;
+            margin-bottom: 15px; position: relative; overflow: hidden;
         }
+
         .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
-        .btn-primary { background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%); color: #000; font-weight: 700; border: none; }
-        
-        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
-        .footer-text { font-size: 0.8rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
+        .btn-map:hover { background: rgba(212, 175, 55, 0.1); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
+            color: #000; border: none; font-weight: 700;
+            box-shadow: 0 8px 20px rgba(170, 119, 28, 0.4);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(170, 119, 28, 0.6); }
+
+        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
+        .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop autoplay preload="auto">
         <source src="music/audio1.mp4" type="audio/mpeg">
     </audio>
 
@@ -193,34 +204,30 @@
         </linearGradient>
     </svg>
 
-    <div class="global-bg"></div>
-    <div class="particles-container">
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
-    </div>
-
-    <div id="welcomeOverlay">
-        <div class="tap-circle">
-            <svg style="width:35px; height:35px; fill:#D4AF37;" viewBox="0 0 24 24"><path d="M21 11.01L3 11v2h18zM3 16h12v2H3zM21 6H3v2h18z"/></svg>
+    <div class="phone-container">
+        
+        <div class="particles-container">
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
         </div>
-        <p>Tocar para abrir<br>la invitación</p>
-    </div>
-
-    <div class="main-wrapper">
+        
         <div class="inner-frame">
             <div class="corner-tr"></div>
             <div class="corner-bl"></div>
 
             <div class="music-toggle" id="musicBtn">
-                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
             </div>
 
             <img src="image/logo.png" alt="Logo Empresa" class="logo-empresa">
             
             <div class="header-text">Tenemos el honor de invitarte</div>
+            
             <h1 class="brand-name gold-text">KAYPI PLAZA</h1>
+            
             <div class="number-main gold-text">3</div>
+            
             <div class="anniversary-text gold-text">TERCER ANIVERSARIO</div>
             <div class="subtitle-text">Una noche de elegancia y celebración</div>
 
@@ -229,7 +236,9 @@
                 
                 <div class="detail-row">
                     <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                        </svg>
                     </div>
                     <div class="detail-info">
                         <h4>Fecha</h4>
@@ -239,7 +248,9 @@
                 
                 <div class="detail-row">
                     <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
                     </div>
                     <div class="detail-info">
                         <h4>Hora</h4>
@@ -249,7 +260,9 @@
 
                 <div class="detail-row">
                     <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
                     </div>
                     <div class="detail-info">
                         <h4>Lugar</h4>
@@ -263,7 +276,7 @@
                 <img id="mapImage" class="map-image" src="" alt="Croquis de ubicación">
                 
                 <a href="URL_DE_GOOGLE_MAPS_AQUI" target="_blank" class="btn btn-map">
-                    <img src="image/google-logo-new-maps.webp" style="width: 24px; margin-right: 12px;" alt="Maps Logo">
+                    <img src="image/google-logo-new-maps.webp" style="width: 22px; margin-right: 10px;" alt="Maps Logo">
                     Ver en Mapa
                 </a>
             </div>
@@ -272,9 +285,10 @@
                 Confirmar Asistencia
             </a>
 
-            <div class="firma-text">Atentamente: Oriana Gutiérrez</div>
+            <div class="firma-text">Atentamente: Kaypi Plaza</div>
 
             <div class="footer-text">Dress Code: Formal</div>
+            
         </div>
     </div>
 
@@ -287,22 +301,37 @@
             img.onerror = function() { this.style.display = "none"; };
 
             // Lógica de Audio y Pantalla de Inicio
-            const overlay = document.getElementById('welcomeOverlay');
             const audio = document.getElementById('bgMusic');
-            const btnMusic = document.getElementById("musicBtn");
+            const btn = document.getElementById("musicBtn");
             const iconPlay = document.getElementById("iconPlay");
             const iconPause = document.getElementById("iconPause");
 
-            overlay.addEventListener('click', function() {
-                audio.play();
-                iconPlay.style.display = "none";
-                iconPause.style.display = "block";
-                
-                overlay.style.opacity = '0';
-                setTimeout(() => { overlay.style.display = 'none'; }, 600);
-            });
+            // Intento inicial de reproducción (Si el navegador lo permite)
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay funcionó
+                    iconPlay.style.display = "none";
+                    iconPause.style.display = "block";
+                }).catch(error => {
+                    // Autoplay fue bloqueado. Mostramos botón de play.
+                    iconPlay.style.display = "block";
+                    iconPause.style.display = "none";
+                });
+            }
 
-            btnMusic.addEventListener("click", function() {
+            // TRUCO: Reproducir al primer toque en la pantalla
+            document.body.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    iconPlay.style.display = "none";
+                    iconPause.style.display = "block";
+                }
+            }, { once: true }); // Solo se ejecuta la primera vez que tocan
+
+            // Lógica del botón de la música
+            btn.addEventListener("click", function(event) {
+                event.stopPropagation(); // Evita que interfiera con el truco de arriba
                 if (audio.paused) {
                     audio.play();
                     iconPlay.style.display = "none";
@@ -317,4 +346,4 @@
     </script>
 
 </body>
-</html>A
+</html>
