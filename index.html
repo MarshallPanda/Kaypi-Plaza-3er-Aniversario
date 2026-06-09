@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación VIP 3er Aniversario - KaypiPlaza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== RESET Y FONDOS ==================== */
+        body, html {
+            margin: 0; padding: 0;
+            background-color: #050505;
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+        }
+
+        .phone-container {
+            width: 100%; max-width: 420px;
+            height: 100vh; max-height: 850px;
+            position: relative;
+            overflow-y: auto; overflow-x: hidden;
+            box-sizing: border-box;
+            
+            /* ======== IMAGEN DE FONDO ACTUALIZADA ======== */
+            background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
+                              url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        @media (min-width: 450px) {
+            .phone-container {
+                height: 90vh; border-radius: 40px;
+                border: 12px solid #111;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 30px rgba(255,255,255,0.05);
+            }
+        }
+        .phone-container::-webkit-scrollbar { display: none; }
+
+        /* ==================== EFECTO DE NIEVE DE COLORES (FONDO) ==================== */
+        .particles-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1; 
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(212, 175, 55, 0.8);
+            border-radius: 50%;
+            animation: fall 10s linear infinite;
+        }
+
+        .particle:nth-of-type(1) { width: 3px; height: 3px; left: 10%; animation-delay: 0s; background-color: #FFE066; }
+        .particle:nth-of-type(2) { width: 2px; height: 2px; left: 20%; animation-delay: 1s; background-color: #D4AF37; }
+        .particle:nth-of-type(3) { width: 4px; height: 4px; left: 30%; animation-delay: 2s; background-color: #FFC04D; }
+        .particle:nth-of-type(4) { width: 1.5px; height: 1.5px; left: 40%; animation-delay: 3s; background-color: #FFE066; }
+        .particle:nth-of-type(5) { width: 3px; height: 3px; left: 50%; animation-delay: 4s; background-color: #D4AF37; }
+        .particle:nth-of-type(6) { width: 2px; height: 2px; left: 60%; animation-delay: 5s; background-color: #FFC04D; }
+        .particle:nth-of-type(7) { width: 4px; height: 4px; left: 70%; animation-delay: 6s; background-color: #FFE066; }
+        .particle:nth-of-type(8) { width: 1.5px; height: 1.5px; left: 80%; animation-delay: 7s; background-color: #D4AF37; }
+        .particle:nth-of-type(9) { width: 3px; height: 3px; left: 90%; animation-delay: 8s; background-color: #FFC04D; }
+        .particle:nth-of-type(10) { width: 2px; height: 2px; left: 15%; animation-delay: 9s; background-color: #FFE066; }
+        
+        @keyframes fall {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(100vh); opacity: 0.6; }
+        }
+
+        /* ==================== MARCO ORNAMENTAL Y CONTENIDO ==================== */
+        .inner-frame {
+            position: relative;
+            margin: 20px; padding: 45px 25px;
+            min-height: calc(100% - 40px);
+            box-sizing: border-box;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            z-index: 2; 
+        }
+
+        .inner-frame::before, .inner-frame::after {
+            content: ''; position: absolute;
+            width: 40px; height: 40px;
+            border-color: #D4AF37; border-style: solid;
+            opacity: 0.7; pointer-events: none;
+        }
+        .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
+        .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
+
+        .corner-tr, .corner-bl { position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
+        .corner-tr { top: 15px; right: 15px; border-width: 2px 2px 0 0; }
+        .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 2px 2px; }
+
+        /* ==================== LOGO EMPRESA (ACTUALIZADO A CIRCULAR) ==================== */
+        .logo-empresa {
+            width: 100px; /* Un poco más grande para el efecto circular */
+            height: 100px;
+            margin: 0 auto 20px auto;
+            display: block;
+            /* Convertir a círculo */
+            border-radius: 50%;
+            /* Asegurar que la imagen se corte correctamente */
+            object-fit: cover;
+            /* Borde dorado sutil */
+            border: 2px solid #D4AF37;
+            /* Fondo blanco por si el logo tiene transparencia */
+            background-color: #ffffff;
+            /* Sombra dorada */
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ==================== BOTÓN DE MÚSICA ==================== */
+        .music-toggle {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(15, 5, 5, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        .music-icon {
+            width: 18px;
+            height: 18px;
+            fill: #D4AF37;
+        }
+
+        /* ==================== TIPOGRAFÍA Y BRILLOS MEJORADOS ==================== */
+        .gold-text {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
+            text-shadow: 0px 4px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .header-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
+        
+        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 800; margin: 0; letter-spacing: 3px; filter: drop-shadow(0 4px 10px rgba(212,175,55,0.3)); }
+        
+        .number-main { font-family: 'Playfair Display', serif; font-size: 9rem; font-weight: 800; margin: 5px 0; line-height: 1.1; filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.4)); }
+        
+        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 5px; margin-bottom: 10px; }
+        
+        .subtitle-text { font-size: 0.9rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 35px; opacity: 0.9; }
+
+        /* ==================== TARJETA DE DETALLES PREMIUM ==================== */
+        .glass-card {
+            background: rgba(15, 5, 5, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .glass-card p { font-size: 0.85rem; line-height: 1.8; color: #ddd; margin: 0 0 30px 0; font-weight: 300; }
+
+        .detail-row {
+            display: flex; align-items: center;
+            margin-bottom: 20px; text-align: left;
+        }
+        .detail-row:last-child { margin-bottom: 0; }
+
+        .icon-circle {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex; justify-content: center; align-items: center;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .icon-svg { width: 22px; height: 22px; fill: url(#goldGradient); }
+
+        .detail-info h4 { margin: 0; font-size: 0.65rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
+        .detail-info span { font-size: 0.95rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
+        .detail-info .sub-text { font-size: 0.75rem; font-weight: 300; color: #aaa; }
+
+        /* ==================== MAPA, BOTONES Y FIRMA ==================== */
+        .map-container { margin-bottom: 35px; width: 100%; }
+        
+        .map-image {
+            width: 100%; height: 160px; object-fit: cover;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .btn {
+            display: flex; justify-content: center; align-items: center;
+            width: 100%; padding: 16px 0; border-radius: 30px;
+            font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
+            letter-spacing: 2px; text-decoration: none; transition: all 0.4s ease;
+            margin-bottom: 15px; position: relative; overflow: hidden;
+        }
+
+        .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
+        .btn-map:hover { background: rgba(212, 175, 55, 0.1); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
+            color: #000; border: none; font-weight: 700;
+            box-shadow: 0 8px 20px rgba(170, 119, 28, 0.4);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(170, 119, 28, 0.6); }
+
+        /* Estilos de firma eliminados al quitar el texto */
+
+        .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="image/tu-musica-de-fondo.mp3" type="audio/mpeg">
+    </audio>
+
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#BF953F" />
+            <stop offset="50%" stop-color="#FCF6BA" />
+            <stop offset="100%" stop-color="#B38728" />
+        </linearGradient>
+    </svg>
+
+    <div class="phone-container">
+        
+        <div class="particles-container">
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        </div>
+        
+        <div class="inner-frame">
+            <div class="corner-tr"></div>
+            <div class="corner-bl"></div>
+
+            <div class="music-toggle" id="musicBtn">
+                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </div>
+
+            <img src="image/logo.png" alt="Logo Empresa" class="logo-empresa">
+            
+            <div class="header-text">Tenemos el honor de invitarte</div>
+            
+            <h1 class="brand-name gold-text">KAYPI PLAZA</h1>
+            
+            <div class="number-main gold-text">3</div>
+            
+            <div class="anniversary-text gold-text">TERCER ANIVERSARIO</div>
+            <div class="subtitle-text">Una noche de elegancia y celebración</div>
+
+            <div class="glass-card">
+                <p>Acompáñanos a festejar tres años de trayectoria y momentos inolvidables. Tu presencia hará de este evento una ocasión verdaderamente especial.</p>
+                
+                <div class="detail-row">
+                    <div class="icon-circle">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                        </svg>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Fecha</h4>
+                        <span>Martes, 16 de Junio</span>
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="icon-circle">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Hora</h4>
+                        <span>7:00 PM - 12:00 AM</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="icon-circle">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Lugar</h4>
+                        <span> Puerto Arena </span>
+                        <span class="sub-text">Local</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <img id="mapImage" class="map-image" src="" alt="Croquis de ubicación">
+                
+                <a href="URL_DE_GOOGLE_MAPS_AQUI" target="_blank" class="btn btn-map">
+                    <img src="image/google-logo-new-maps.webp" style="width: 22px; margin-right: 10px;" alt="Maps Logo">
+                    Ver en Mapa
+                </a>
+            </div>
+
+            <a href="https://wa.me/123456789?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%203er%20Aniversario%20de%20Kaypi%20Plaza.%20Será%20un%20honor%20acompañarlos." target="_blank" class="btn btn-primary">
+                Confirmar Asistencia
+            </a>
+
+            <div class="footer-text">Dress Code: Formal</div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lógica para imagen de mapa
+            const img = document.getElementById("mapImage");
+            const src = img.getAttribute("src").trim();
+            if (src !== "") { img.style.display = "block"; }
+            img.onerror = function() { this.style.display = "none"; };
+
+            // Lógica para música de fondo
+            const audio = document.getElementById("bgMusic");
+            const btn = document.getElementById("musicBtn");
+            const iconPlay = document.getElementById("iconPlay");
+            const iconPause = document.getElementById("iconPause");
+
+            btn.addEventListener("click", function() {
+                if (audio.paused) {
+                    audio.play();
+                    iconPlay.style.display = "none";
+                    iconPause.style.display = "block";
+                } else {
+                    audio.pause();
+                    iconPlay.style.display = "block";
+                    iconPause.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
