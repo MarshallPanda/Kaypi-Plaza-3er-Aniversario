@@ -12,40 +12,52 @@
             background-color: #050505;
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* ===== DISEÑO NATIVO PARA CELULARES (Por Defecto) ===== */
         .phone-container {
-            width: 100%; max-width: 420px;
-            height: 100vh; max-height: 850px;
+            width: 100%;
+            min-height: 100vh; /* Ocupa toda la pantalla de borde a borde */
             position: relative;
-            overflow-y: auto; overflow-x: hidden;
             box-sizing: border-box;
             
-            /* ======== IMAGEN DE FONDO ACTUALIZADA ======== */
+            /* ======== IMAGEN DE FONDO ======== */
             background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
                               url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
             background-size: cover; background-position: center; background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        @media (min-width: 450px) {
+        /* ===== DISEÑO PARA PC / TABLET (Simulador de Celular) ===== */
+        @media (min-width: 768px) {
+            body {
+                display: flex; justify-content: center; align-items: center;
+                min-height: 100vh;
+            }
             .phone-container {
-                height: 90vh; border-radius: 40px;
+                width: 420px; /* Ancho fijo para PC */
+                height: 90vh; max-height: 850px; min-height: auto;
+                border-radius: 40px;
                 border: 12px solid #111;
                 box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 30px rgba(255,255,255,0.05);
+                overflow-y: auto; /* Scroll interno solo en PC */
+                margin: 20px 0;
             }
+            .phone-container::-webkit-scrollbar { display: none; }
         }
-        .phone-container::-webkit-scrollbar { display: none; }
 
-        /* ==================== EFECTO DE NIEVE DE COLORES (FONDO) ==================== */
+        /* ==================== EFECTO DE NIEVE ==================== */
         .particles-container {
-            position: absolute;
+            position: fixed; /* Fijo para que no se corte al bajar en celular */
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
             z-index: 1; 
-            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .particles-container { position: absolute; } /* Contenido dentro del marco en PC */
         }
 
         .particle {
@@ -74,8 +86,8 @@
         /* ==================== MARCO ORNAMENTAL Y CONTENIDO ==================== */
         .inner-frame {
             position: relative;
-            margin: 20px; padding: 45px 25px;
-            min-height: calc(100% - 40px);
+            margin: 15px; padding: 45px 20px;
+            min-height: calc(100% - 30px);
             box-sizing: border-box;
             text-align: center;
             background: radial-gradient(circle at top, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
@@ -83,155 +95,100 @@
             z-index: 2; 
         }
 
-        .inner-frame::before, .inner-frame::after {
-            content: ''; position: absolute;
-            width: 40px; height: 40px;
-            border-color: #D4AF37; border-style: solid;
-            opacity: 0.7; pointer-events: none;
-        }
+        .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
         .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
 
-        .corner-tr, .corner-bl { position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
+        .corner-tr, .corner-bl { position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .corner-tr { top: 15px; right: 15px; border-width: 2px 2px 0 0; }
         .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 2px 2px; }
 
-        /* ==================== LOGO EMPRESA (ACTUALIZADO A CIRCULAR) ==================== */
+        /* ==================== LOGO EMPRESA ==================== */
         .logo-empresa {
-            width: 100px; /* Un poco más grande para el efecto circular */
+            width: 100px; 
             height: 100px;
             margin: 0 auto 20px auto;
             display: block;
-            /* Convertir a círculo */
             border-radius: 50%;
-            /* Asegurar que la imagen se corte correctamente */
             object-fit: cover;
-            /* Borde dorado sutil */
             border: 2px solid #D4AF37;
-            /* Fondo blanco por si el logo tiene transparencia */
             background-color: #ffffff;
-            /* Sombra dorada */
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
         }
 
         /* ==================== BOTÓN DE MÚSICA ==================== */
         .music-toggle {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 40px;
-            height: 40px;
+            top: 25px; right: 25px;
+            width: 40px; height: 40px;
             border-radius: 50%;
             background: rgba(15, 5, 5, 0.6);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 10; backdrop-filter: blur(5px);
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
+        .music-icon { width: 18px; height: 18px; fill: #D4AF37; }
 
-        .music-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(212, 175, 55, 0.2);
-        }
-
-        .music-icon {
-            width: 18px;
-            height: 18px;
-            fill: #D4AF37;
-        }
-
-        /* ==================== TIPOGRAFÍA Y BRILLOS MEJORADOS ==================== */
+        /* ==================== TIPOGRAFÍA ==================== */
         .gold-text {
             background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
             filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
-            text-shadow: 0px 4px 20px rgba(212, 175, 55, 0.2);
         }
 
         .header-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
-        
-        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 800; margin: 0; letter-spacing: 3px; filter: drop-shadow(0 4px 10px rgba(212,175,55,0.3)); }
-        
-        .number-main { font-family: 'Playfair Display', serif; font-size: 9rem; font-weight: 800; margin: 5px 0; line-height: 1.1; filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.4)); }
-        
-        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 5px; margin-bottom: 10px; }
-        
-        .subtitle-text { font-size: 0.9rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 35px; opacity: 0.9; }
+        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: 2px; }
+        .number-main { font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 800; margin: 0; line-height: 1.1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
+        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 5px; }
+        .subtitle-text { font-size: 0.85rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 30px; }
 
-        /* ==================== TARJETA DE DETALLES PREMIUM ==================== */
+        /* ==================== TARJETA DE DETALLES ==================== */
         .glass-card {
             background: rgba(15, 5, 5, 0.5);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(212, 175, 55, 0.2); 
             border-radius: 20px;
-            padding: 30px 20px;
+            padding: 25px 15px;
             margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
         }
 
-        .glass-card p { font-size: 0.85rem; line-height: 1.8; color: #ddd; margin: 0 0 30px 0; font-weight: 300; }
+        .glass-card p { font-size: 0.85rem; line-height: 1.6; color: #ddd; margin: 0 0 25px 0; font-weight: 300; }
 
-        .detail-row {
-            display: flex; align-items: center;
-            margin-bottom: 20px; text-align: left;
-        }
+        .detail-row { display: flex; align-items: center; margin-bottom: 20px; text-align: left; }
         .detail-row:last-child { margin-bottom: 0; }
 
         .icon-circle {
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            background: rgba(212, 175, 55, 0.05);
+            width: 40px; height: 40px; min-width: 40px;
+            border-radius: 50%; background: rgba(212, 175, 55, 0.05);
             border: 1px solid rgba(212, 175, 55, 0.4);
             display: flex; justify-content: center; align-items: center;
             margin-right: 15px;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
         }
-
-        .icon-svg { width: 22px; height: 22px; fill: url(#goldGradient); }
+        .icon-svg { width: 20px; height: 20px; fill: url(#goldGradient); }
 
         .detail-info h4 { margin: 0; font-size: 0.65rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
-        .detail-info span { font-size: 0.95rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
+        .detail-info span { font-size: 0.9rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
         .detail-info .sub-text { font-size: 0.75rem; font-weight: 300; color: #aaa; }
 
         /* ==================== MAPA, BOTONES Y FIRMA ==================== */
-        .map-container { margin-bottom: 35px; width: 100%; }
-        
-        .map-image {
-            width: 100%; height: 160px; object-fit: cover;
-            border-radius: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-            margin-bottom: 15px;
-            display: none;
-        }
+        .map-container { margin-bottom: 30px; width: 100%; }
+        .map-image { width: 100%; height: 160px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.4); margin-bottom: 15px; display: none; }
 
         .btn {
             display: flex; justify-content: center; align-items: center;
             width: 100%; padding: 16px 0; border-radius: 30px;
             font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
-            letter-spacing: 2px; text-decoration: none; transition: all 0.4s ease;
-            margin-bottom: 15px; position: relative; overflow: hidden;
+            letter-spacing: 2px; text-decoration: none; margin-bottom: 15px;
         }
 
         .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
-        .btn-map:hover { background: rgba(212, 175, 55, 0.1); }
-
         .btn-primary {
             background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
-            color: #000; border: none; font-weight: 700;
-            box-shadow: 0 8px 20px rgba(170, 119, 28, 0.4);
+            color: #000; font-weight: 700; border: none;
         }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(170, 119, 28, 0.6); }
-
-        /* Estilos de firma eliminados al quitar el texto */
 
         .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
     </style>
@@ -330,6 +287,10 @@
             <a href="https://wa.me/51971111368?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%203er%20Aniversario%20de%20Kaypi%20Plaza.%20Será%20un%20honor%20acompañarlos." target="_blank" class="btn btn-primary">
                 Confirmar Asistencia
             </a>
+
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px;">
+                Atentamente: Oriana Gutiérrez
+            </div>
 
             <div class="footer-text">Dress Code: Formal</div>
             
