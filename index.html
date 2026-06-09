@@ -2,71 +2,69 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación VIP 3er Aniversario - KaypiPlaza</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Invitación VIP 3er Aniversario - Kaypi Plaza</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
     <style>
-        /* ==================== RESET Y FONDOS ==================== */
+        /* ==================== RESET ABSOLUTO ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body, html {
-            margin: 0; padding: 0;
+            width: 100%;
+            min-height: 100vh;
             background-color: #050505;
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== DISEÑO NATIVO PARA CELULARES (Por Defecto) ===== */
-        .phone-container {
-            width: 100%;
-            min-height: 100vh; /* Ocupa toda la pantalla de borde a borde */
-            position: relative;
-            box-sizing: border-box;
-            
-            /* ======== IMAGEN DE FONDO ======== */
-            background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
-                              url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
-            background-size: cover; background-position: center; background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        /* ===== DISEÑO PARA PC / TABLET (Simulador de Celular) ===== */
-        @media (min-width: 768px) {
+        /* ===== DISEÑO 100% PANTALLA COMPLETA ===== */
+        .phone-container {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
+                              url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Diseño para PC (Solo pantallas muy grandes) */
+        @media (min-width: 1024px) {
             body {
                 display: flex; justify-content: center; align-items: center;
-                min-height: 100vh;
+                background-color: #111;
             }
             .phone-container {
-                width: 420px; /* Ancho fijo para PC */
-                height: 90vh; max-height: 850px; min-height: auto;
+                width: 450px; 
+                height: 90vh; 
+                min-height: auto;
                 border-radius: 40px;
-                border: 12px solid #111;
-                box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 30px rgba(255,255,255,0.05);
-                overflow-y: auto; /* Scroll interno solo en PC */
-                margin: 20px 0;
+                border: 12px solid #000;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+                overflow-y: auto;
             }
-            .phone-container::-webkit-scrollbar { display: none; }
         }
 
         /* ==================== EFECTO DE NIEVE ==================== */
         .particles-container {
-            position: fixed; /* Fijo para que no se corte al bajar en celular */
+            position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
             z-index: 1; 
         }
+        @media (min-width: 1024px) { .particles-container { position: absolute; } }
 
-        @media (min-width: 768px) {
-            .particles-container { position: absolute; } /* Contenido dentro del marco en PC */
-        }
-
-        .particle {
-            position: absolute;
-            background-color: rgba(212, 175, 55, 0.8);
-            border-radius: 50%;
-            animation: fall 10s linear infinite;
-        }
-
+        .particle { position: absolute; background-color: rgba(212, 175, 55, 0.8); border-radius: 50%; animation: fall 10s linear infinite; }
         .particle:nth-of-type(1) { width: 3px; height: 3px; left: 10%; animation-delay: 0s; background-color: #FFE066; }
         .particle:nth-of-type(2) { width: 2px; height: 2px; left: 20%; animation-delay: 1s; background-color: #D4AF37; }
         .particle:nth-of-type(3) { width: 4px; height: 4px; left: 30%; animation-delay: 2s; background-color: #FFC04D; }
@@ -78,27 +76,23 @@
         .particle:nth-of-type(9) { width: 3px; height: 3px; left: 90%; animation-delay: 8s; background-color: #FFC04D; }
         .particle:nth-of-type(10) { width: 2px; height: 2px; left: 15%; animation-delay: 9s; background-color: #FFE066; }
         
-        @keyframes fall {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(100vh); opacity: 0.6; }
-        }
+        @keyframes fall { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(100vh); opacity: 0.6; } }
 
-        /* ==================== MARCO ORNAMENTAL Y CONTENIDO ==================== */
+        /* ==================== CONTENIDO PRINCIPAL ==================== */
         .inner-frame {
             position: relative;
-            margin: 15px; padding: 45px 20px;
-            min-height: calc(100% - 30px);
-            box-sizing: border-box;
+            flex-grow: 1;
+            margin: 15px; 
+            padding: 40px 20px;
             text-align: center;
             background: radial-gradient(circle at top, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             z-index: 2; 
         }
 
         .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
         .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
-
         .corner-tr, .corner-bl { position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .corner-tr { top: 15px; right: 15px; border-width: 2px 2px 0 0; }
         .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 2px 2px; }
@@ -118,24 +112,23 @@
 
         /* ==================== BOTÓN DE MÚSICA ==================== */
         .music-toggle {
-            position: absolute;
+            position: fixed;
             top: 25px; right: 25px;
-            width: 40px; height: 40px;
+            width: 45px; height: 45px;
             border-radius: 50%;
-            background: rgba(15, 5, 5, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(15, 5, 5, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.6);
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer; z-index: 10; backdrop-filter: blur(5px);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            cursor: pointer; z-index: 99; backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
-        .music-icon { width: 18px; height: 18px; fill: #D4AF37; }
+        @media (min-width: 1024px) { .music-toggle { position: absolute; } }
+        .music-icon { width: 20px; height: 20px; fill: #D4AF37; }
 
         /* ==================== TIPOGRAFÍA ==================== */
         .gold-text {
             background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
+            color: transparent; -webkit-background-clip: text; background-clip: text;
             filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
         }
 
@@ -156,7 +149,6 @@
         }
 
         .glass-card p { font-size: 0.85rem; line-height: 1.6; color: #ddd; margin: 0 0 25px 0; font-weight: 300; }
-
         .detail-row { display: flex; align-items: center; margin-bottom: 20px; text-align: left; }
         .detail-row:last-child { margin-bottom: 0; }
 
@@ -183,20 +175,15 @@
             font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
             letter-spacing: 2px; text-decoration: none; margin-bottom: 15px;
         }
-
         .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
-        .btn-primary {
-            background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
-            color: #000; font-weight: 700; border: none;
-        }
-
+        .btn-primary { background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%); color: #000; font-weight: 700; border: none; }
         .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
-        <source src="music/audio1.mp4" type="audio/mpeg">
+    <audio id="bgMusic" loop autoplay preload="auto">
+        <source src="music/audio2.mp4" type="audio/mpeg">
     </audio>
 
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
@@ -208,7 +195,6 @@
     </svg>
 
     <div class="phone-container">
-        
         <div class="particles-container">
             <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
             <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
@@ -219,18 +205,15 @@
             <div class="corner-bl"></div>
 
             <div class="music-toggle" id="musicBtn">
-                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
             </div>
 
             <img src="image/logo.png" alt="Logo Empresa" class="logo-empresa">
             
             <div class="header-text">Tenemos el honor de invitarte</div>
-            
             <h1 class="brand-name gold-text">KAYPI PLAZA</h1>
-            
             <div class="number-main gold-text">3</div>
-            
             <div class="anniversary-text gold-text">TERCER ANIVERSARIO</div>
             <div class="subtitle-text">Una noche de elegancia y celebración</div>
 
@@ -239,9 +222,7 @@
                 
                 <div class="detail-row">
                     <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
-                        </svg>
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
                     </div>
                     <div class="detail-info">
                         <h4>Fecha</h4>
@@ -251,9 +232,7 @@
                 
                 <div class="detail-row">
                     <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                        </svg>
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
                     </div>
                     <div class="detail-info">
                         <h4>Hora</h4>
@@ -263,9 +242,7 @@
 
                 <div class="detail-row">
                     <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                     </div>
                     <div class="detail-info">
                         <h4>Lugar</h4>
@@ -293,31 +270,58 @@
             </div>
 
             <div class="footer-text">Dress Code: Formal</div>
-            
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Lógica para imagen de mapa
+            // MAPA
             const img = document.getElementById("mapImage");
             const src = img.getAttribute("src").trim();
             if (src !== "") { img.style.display = "block"; }
             img.onerror = function() { this.style.display = "none"; };
 
-            // Lógica para música de fondo
+            // MÚSICA Y TRUCO DE AUTOPLAY
             const audio = document.getElementById("bgMusic");
             const btn = document.getElementById("musicBtn");
             const iconPlay = document.getElementById("iconPlay");
             const iconPause = document.getElementById("iconPause");
+            let userPaused = false; // Variable para saber si el usuario lo pausó a propósito
 
-            btn.addEventListener("click", function() {
+            // Intento inicial de reproducción (Si el navegador lo permite)
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay funcionó
+                    iconPlay.style.display = "none";
+                    iconPause.style.display = "block";
+                }).catch(error => {
+                    // Autoplay fue bloqueado. Mostramos botón de play.
+                    iconPlay.style.display = "block";
+                    iconPause.style.display = "none";
+                });
+            }
+
+            // TRUCO: Reproducir al primer toque en la pantalla
+            document.body.addEventListener('click', function() {
+                if (audio.paused && !userPaused) {
+                    audio.play();
+                    iconPlay.style.display = "none";
+                    iconPause.style.display = "block";
+                }
+            }, { once: true }); // Solo se ejecuta la primera vez que tocan
+
+            // Lógica del botón de la música
+            btn.addEventListener("click", function(event) {
+                event.stopPropagation(); // Evita que interfiera con el truco de arriba
                 if (audio.paused) {
                     audio.play();
+                    userPaused = false;
                     iconPlay.style.display = "none";
                     iconPause.style.display = "block";
                 } else {
                     audio.pause();
+                    userPaused = true; // Guardamos que el usuario quiso pausarla
                     iconPlay.style.display = "block";
                     iconPause.style.display = "none";
                 }
