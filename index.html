@@ -3,347 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Invitación VIP 3er Aniversario - Kaypi Plaza</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <title>Invitación VIP Kaypi Plaza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ==================== RESET Y FONDOS ==================== */
+        :root {
+            --bg-dark: #0a0104; /* Fondo oscuro muy sutil */
+            --gold: #d4a757; /* Dorado de la imagen_0.png */
+            --white: #ffffff;
+            --grey-text: #cccccc;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
         body, html {
-            margin: 0; padding: 0;
-            background-color: #050505;
-            font-family: 'Montserrat', sans-serif;
-            color: #ffffff;
-            display: flex; justify-content: center; align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--white);
+            font-family: var(--font-sans);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
         }
 
-        .phone-container {
-            width: 100%; max-width: 420px;
-            height: 100vh; max-height: 850px;
+        .main-container {
+            width: 100%;
+            /* Ancho máximo para evitar estiramiento en tablets/PC, pero sigue siendo responsive en celulares */
+            max-width: 480px; 
+            padding: 3rem 1.5rem; /* Padding vertical grande, horizontal pequeño para aprovechar ancho */
+            /* Fondo bokeh dorado oscuro como en image_0.png */
+            background-image: url('image/bokeh_background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Mantiene el fondo quieto al hacer scroll en móvil */
             position: relative;
-            overflow-y: auto; overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             box-sizing: border-box;
-            
-            /* ======== IMAGEN DE FONDO ACTUALIZADA ======== */
-            background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
-                              url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            overflow-x: hidden; /* Evita scroll horizontal */
         }
 
-        @media (min-width: 450px) {
-            .phone-container {
-                height: 90vh; border-radius: 40px;
-                border: 12px solid #111;
-                box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 30px rgba(255,255,255,0.05);
-            }
-        }
-        .phone-container::-webkit-scrollbar { display: none; }
-
-        /* ==================== EFECTO DE NIEVE DE COLORES (FONDO) ==================== */
-        .particles-container {
+        /* Gráficos de esquina (Dorado y elegante) */
+        .corner {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-color: var(--gold);
+            border-style: solid;
             pointer-events: none;
-            z-index: 1; /* Por debajo de todo el contenido */
-            overflow: hidden;
+            opacity: 0.8;
+        }
+        .corner-tl {
+            top: 1.5rem;
+            left: 1.5rem;
+            border-width: 3px 0 0 3px;
+        }
+        .corner-br {
+            bottom: 1.5rem;
+            right: 1.5rem;
+            border-width: 0 3px 3px 0;
         }
 
-        .particle {
-            position: absolute;
-            background-color: rgba(212, 175, 55, 0.8);
-            border-radius: 50%;
-            animation: fall 10s linear infinite;
+        /* Logotipo (Centrado) */
+        .logo-area {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .logo-image {
+            width: 6.5rem;
+            height: auto;
         }
 
-        /* Variables CSS para aleatoriedad sin JS */
-        .particle:nth-of-type(1) { width: 3px; height: 3px; left: 10%; animation-delay: 0s; background-color: #FFE066; }
-        .particle:nth-of-type(2) { width: 2px; height: 2px; left: 20%; animation-delay: 1s; background-color: #D4AF37; }
-        .particle:nth-of-type(3) { width: 4px; height: 4px; left: 30%; animation-delay: 2s; background-color: #FFC04D; }
-        .particle:nth-of-type(4) { width: 1.5px; height: 1.5px; left: 40%; animation-delay: 3s; background-color: #FFE066; }
-        .particle:nth-of-type(5) { width: 3px; height: 3px; left: 50%; animation-delay: 4s; background-color: #D4AF37; }
-        .particle:nth-of-type(6) { width: 2px; height: 2px; left: 60%; animation-delay: 5s; background-color: #FFC04D; }
-        .particle:nth-of-type(7) { width: 4px; height: 4px; left: 70%; animation-delay: 6s; background-color: #FFE066; }
-        .particle:nth-of-type(8) { width: 1.5px; height: 1.5px; left: 80%; animation-delay: 7s; background-color: #D4AF37; }
-        .particle:nth-of-type(9) { width: 3px; height: 3px; left: 90%; animation-delay: 8s; background-color: #FFC04D; }
-        .particle:nth-of-type(10) { width: 2px; height: 2px; left: 15%; animation-delay: 9s; background-color: #FFE066; }
-        /* Repetir para más densidad si lo deseas */
-        
-        @keyframes fall {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(100vh); opacity: 0.6; }
-        }
-
-        /* ==================== MARCO ORNAMENTAL Y CONTENIDO ==================== */
-        .inner-frame {
-            position: relative;
-            margin: 20px; padding: 45px 25px;
-            min-height: calc(100% - 40px);
-            box-sizing: border-box;
+        /* Tipografía y textos principales */
+        .invitation-text {
+            font-size: 0.85rem;
+            color: var(--grey-text);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 0 0 0.75rem 0;
             text-align: center;
-            background: radial-gradient(circle at top, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            z-index: 2; /* Por encima de la nieve */
+        }
+        .brand-title {
+            font-family: var(--font-serif);
+            color: var(--gold);
+            font-size: 2.3rem;
+            margin: 0 0 3.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
         }
 
-        /* Detalles de las esquinas doradas */
-        .inner-frame::before, .inner-frame::after {
-            content: ''; position: absolute;
-            width: 40px; height: 40px;
-            border-color: #D4AF37; border-style: solid;
-            opacity: 0.7; pointer-events: none;
+        /* Gran número "3" (Con MUCHO espacio) SOLUCIÓN AL CORTE */
+        .anniversary-number-container {
+            display: flex;
+            justify-content: center;
+            /* SE AÑADE MUCHO ESPACIO AQUÍ */
+            margin: 5rem 0; 
+            text-align: center;
+            overflow: visible; /* Asegura que el número no se corte */
         }
-        .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
-        .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
-
-        .corner-tr, .corner-bl { position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
-        .corner-tr { top: 15px; right: 15px; border-width: 2px 2px 0 0; }
-        .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 2px 2px; }
-
-        /* ==================== TIPOGRAFÍA Y BRILLOS MEJORADOS ==================== */
-        /* Oro Estático Rico (Sin barrido de luz) */
-        .gold-text {
-            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
-            text-shadow: 0px 4px 20px rgba(212, 175, 55, 0.2);
+        .anniversary-number {
+            font-family: var(--font-serif);
+            color: var(--gold);
+            font-size: 9rem;
+            line-height: 1;
+            font-weight: 700;
+            margin: 0;
+            display: inline-block;
+            text-align: center;
         }
 
-        .header-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
-        
-        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 800; margin: 0; letter-spacing: 3px; filter: drop-shadow(0 4px 10px rgba(212,175,55,0.3)); }
-        
-        .number-main { font-family: 'Playfair Display', serif; font-size: 9rem; font-weight: 800; margin: 5px 0; line-height: 1.1; filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.4)); }
-        
-        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 5px; margin-bottom: 10px; }
-        
-        .subtitle-text { font-size: 0.9rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 35px; opacity: 0.9; }
-
-        /* ==================== TARJETA DE DETALLES PREMIUM (Glassmorphism sutil) ==================== */
-        .glass-card {
-            background: rgba(15, 5, 5, 0.5);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.2); /* Borde sutil */
-            border-radius: 20px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+        /* Texto del aniversario */
+        .anniversary-text {
+            font-family: var(--font-serif);
+            color: var(--gold);
+            font-size: 1.7rem;
+            margin: 0 0 0.75rem 0;
+            text-align: center;
+        }
+        .celebration-subtext {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin: 0 0 3.5rem 0;
+            text-align: center;
         }
 
-        .glass-card p { font-size: 0.85rem; line-height: 1.8; color: #ddd; margin: 0 0 30px 0; font-weight: 300; }
-
-        .detail-row {
-            display: flex; align-items: center;
-            margin-bottom: 20px; text-align: left;
+        /* Bloque de detalles de la invitación */
+        .details-block {
+            width: 100%;
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: center; /* Centrar elementos en móvil */
         }
-        .detail-row:last-child { margin-bottom: 0; }
-
-        .icon-circle {
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            display: flex; justify-content: center; align-items: center;
-            margin-right: 15px;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: auto;
+            max-width: 90%;
+            text-align: left;
         }
-
-        .icon-svg { width: 22px; height: 22px; fill: url(#goldGradient); }
-
-        .detail-info h4 { margin: 0; font-size: 0.65rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
-        .detail-info span { font-size: 0.95rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
-        .detail-info .sub-text { font-size: 0.75rem; font-weight: 300; color: #aaa; }
-
-        /* ==================== MAPA Y BOTONES ==================== */
-        .map-container { margin-bottom: 35px; width: 100%; }
-        
-        .map-image {
-            width: 100%; height: 160px; object-fit: cover;
-            border-radius: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-            margin-bottom: 15px;
-            display: none;
+        .icon-placeholder {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: transparent; /* Fondo transparente, icono SVG */
+        }
+        .detail-text {
+            font-size: 1.05rem;
+            margin: 0;
         }
 
+        /* Botones (Adaptables al toque en móvil) */
+        .button-area {
+            width: 100%;
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
         .btn {
-            display: flex; justify-content: center; align-items: center;
-            width: 100%; padding: 16px 0; border-radius: 30px;
-            font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
-            letter-spacing: 2px; text-decoration: none; transition: all 0.4s ease;
-            margin-bottom: 15px; position: relative; overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 95%; /* Estiramiento para toque fácil */
+            padding: 1.5rem 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            box-sizing: border-box;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+        .btn-map {
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            background-color: transparent;
+            gap: 0.75rem; /* Espacio para icono */
+        }
+        .btn-confirm {
+            color: var(--bg-dark);
+            background-color: var(--gold);
+            box-shadow: 0 5px 20px rgba(212, 167, 87, 0.4);
         }
 
-        .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
-        .btn-map:hover { background: rgba(212, 175, 55, 0.1); }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
-            color: #000; border: none; font-weight: 700;
-            box-shadow: 0 8px 20px rgba(170, 119, 28, 0.4);
+        /* Cierre */
+        .signature-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            text-align: center;
         }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(170, 119, 28, 0.6); }
+        .signature-name {
+            font-family: var(--font-serif);
+            color: var(--gold);
+            font-size: 1.35rem;
+            margin: 0 0 0.75rem 0;
+            text-align: center;
+        }
+        .dress-code {
+            font-size: 0.9rem;
+            color: var(--grey-text);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 0;
+            text-align: center;
+        }
 
-        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
-        .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
+        /* Media query para pantallas extra pequeñas (ej. iPhone SE) */
+        @media (max-width: 360px) {
+            .brand-title { font-size: 1.9rem; }
+            .anniversary-number { font-size: 7.5rem; }
+            .celebration-subtext { font-size: 1rem; }
+            .btn { font-size: 1rem; padding: 1.25rem 0; }
+        }
+
+        /* Iconos SVG (similares a los de la imagen) */
+        .calendar-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="%23d4a757"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13zM4 6V5h16v1h-1v2h1v11c0 1.1-.9 2-2 2h-4c-1.1 0-2-.9-2-2V8h-2V6h1v2h1V6h-1v2h-2V6h1v2H7V6h1v2h1V6h-1v2H5V6H4zM10 13h4v4h-4v-4zm0 0zm0 0"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .clock-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="%23d4a757"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.24-11.76l-1.06 1.06 3.1 3.1h-4.28c-.28 0-.5.22-.5.5v1.22c0 .28.22.5.5.5h6.22c.28 0 .5-.22.5-.5v-6.22c0-.28-.22-.5-.5-.5H18.78c-.28 0-.5.22-.5.5v3.1l-3.1-3.1z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .map-pin-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="%23d4a757"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .map-icon-svg-inline {
+            width: 1.2rem;
+            height: 1.2rem;
+            display: inline-block;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="%23d4a757"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop autoplay preload="auto">
-        <source src="music/audio1.mp4" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/background_music.mp3" type="audio/mpeg">
     </audio>
 
-    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
-        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#BF953F" />
-            <stop offset="50%" stop-color="#FCF6BA" />
-            <stop offset="100%" stop-color="#B38728" />
-        </linearGradient>
-    </svg>
+    <div class="main-container">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-br"></div>
 
-    <div class="phone-container">
-        
-        <div class="particles-container">
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="logo-area">
+            <img src="image/logo.png" alt="Logo Kaypi Plaza" class="logo-image">
         </div>
-        
-        <div class="inner-frame">
-            <div class="corner-tr"></div>
-            <div class="corner-bl"></div>
 
-            <div class="music-toggle" id="musicBtn">
-                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <p class="invitation-text">TENEMOS EL HONOR DE INVITARTE</p>
+        <h1 class="brand-title">KAYPI PLAZA</h1>
+
+        <div class="anniversary-number-container">
+            <div class="anniversary-number gold-text">3</div>
+        </div>
+
+        <h2 class="anniversary-text">TERCER ANIVERSARIO</h2>
+        <p class="celebration-subtext">Una noche de elegancia y celebración</p>
+
+        <div class="details-block">
+            <div class="detail-item">
+                <div class="icon-placeholder calendar-icon"></div>
+                <p class="detail-text">Martes, 16 de Junio</p>
             </div>
-
-            <img src="image/logo.png" alt="Logo Empresa" class="logo-empresa">
-            
-            <div class="header-text">Tenemos el honor de invitarte</div>
-            
-            <h1 class="brand-name gold-text">KAYPI PLAZA</h1>
-            
-            <div class="number-main gold-text">3</div>
-            
-            <div class="anniversary-text gold-text">TERCER ANIVERSARIO</div>
-            <div class="subtitle-text">Una noche de elegancia y celebración</div>
-
-            <div class="glass-card">
-                <p>Acompáñanos a festejar tres años de trayectoria y momentos inolvidables. Tu presencia hará de este evento una ocasión verdaderamente especial.</p>
-                
-                <div class="detail-row">
-                    <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
-                        </svg>
-                    </div>
-                    <div class="detail-info">
-                        <h4>Fecha</h4>
-                        <span>Martes, 16 de Junio</span>
-                    </div>
-                </div>
-                
-                <div class="detail-row">
-                    <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                        </svg>
-                    </div>
-                    <div class="detail-info">
-                        <h4>Hora</h4>
-                        <span>7:00 PM</span>
-                    </div>
-                </div>
-
-                <div class="detail-row">
-                    <div class="icon-circle">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <div class="detail-info">
-                        <h4>Lugar</h4>
-                        <span> Puerto Arena </span>
-                        <span class="sub-text">Local</span>
-                    </div>
-                </div>
+            <div class="detail-item">
+                <div class="icon-placeholder clock-icon"></div>
+                <p class="detail-text">7:00 PM</p>
             </div>
-
-            <div class="map-container">
-                <img id="mapImage" class="map-image" src="" alt="Croquis de ubicación">
-                
-                <a href="URL_DE_GOOGLE_MAPS_AQUI" target="_blank" class="btn btn-map">
-                    <img src="image/google-logo-new-maps.webp" style="width: 22px; margin-right: 10px;" alt="Maps Logo">
-                    Ver en Mapa
-                </a>
+            <div class="detail-item">
+                <div class="icon-placeholder map-pin-icon"></div>
+                <p class="detail-text">Puerto Arena Local</p>
             </div>
+        </div>
 
-            <a href="https://wa.me/51971111368?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%203er%20Aniversario%20de%20Kaypi%20Plaza.%20Será%20un%20honor%20acompañarlos." target="_blank" class="btn btn-primary">
-                Confirmar Asistencia
+        <div class="button-area">
+            <a href="#" class="btn btn-map">
+                <div class="map-icon-svg-inline"></div> <span class="btn-text-black">VER EN MAPA</span>
             </a>
+            <a href="#" class="btn btn-confirm">
+                CONFIRMAR ASISTENCIA
+            </a>
+        </div>
 
-            <div class="firma-text">Atentamente: Kaypi Plaza</div>
-
-            <div class="footer-text">Dress Code: Formal</div>
-            
+        <div class="signature-area">
+            <p class="signature-name">Atentamente: Kaypi Plaza</p>
+            <p class="dress-code">DRESS CODE: FORMAL</p>
         </div>
     </div>
-
+    
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Lógica para imagen de mapa
-            const img = document.getElementById("mapImage");
-            const src = img.getAttribute("src").trim();
-            if (src !== "") { img.style.display = "block"; }
-            img.onerror = function() { this.style.display = "none"; };
+        window.addEventListener('load', () => {
+            const music = document.getElementById('bgMusic');
+            
+            // Función para reproducir al primer toque del usuario (click o toque)
+            const startMusicOnFirstInteraction = () => {
+                music.play();
+                console.log("Música iniciada por interacción");
+                // Eliminar los oyentes para que solo se ejecute una vez
+                document.body.removeEventListener('click', startMusicOnFirstInteraction);
+                document.body.removeEventListener('touchstart', startMusicOnFirstInteraction);
+            };
 
-            // Lógica de Audio y Pantalla de Inicio
-            const audio = document.getElementById('bgMusic');
-            const btn = document.getElementById("musicBtn");
-            const iconPlay = document.getElementById("iconPlay");
-            const iconPause = document.getElementById("iconPause");
-
-            // Intento inicial de reproducción (Si el navegador lo permite)
-            let playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Autoplay funcionó
-                    iconPlay.style.display = "none";
-                    iconPause.style.display = "block";
-                }).catch(error => {
-                    // Autoplay fue bloqueado. Mostramos botón de play.
-                    iconPlay.style.display = "block";
-                    iconPause.style.display = "none";
-                });
-            }
-
-            // TRUCO: Reproducir al primer toque en la pantalla
-            document.body.addEventListener('click', function() {
-                if (audio.paused) {
-                    audio.play();
-                    iconPlay.style.display = "none";
-                    iconPause.style.display = "block";
-                }
-            }, { once: true }); // Solo se ejecuta la primera vez que tocan
-
-            // Lógica del botón de la música
-            btn.addEventListener("click", function(event) {
-                event.stopPropagation(); // Evita que interfiera con el truco de arriba
-                if (audio.paused) {
-                    audio.play();
-                    iconPlay.style.display = "none";
-                    iconPause.style.display = "block";
-                } else {
-                    audio.pause();
-                    iconPlay.style.display = "block";
-                    iconPause.style.display = "none";
-                }
-            });
+            // Oyentes para interacción (click o toque)
+            document.body.addEventListener('click', startMusicOnFirstInteraction);
+            document.body.addEventListener('touchstart', startMusicOnFirstInteraction);
         });
     </script>
-
 </body>
 </html>
