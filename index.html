@@ -7,41 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
     <style>
         /* ==================== RESET ABSOLUTO ==================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #050505;
+            background-color: #000000; /* Fondo base negro */
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* FONDO FIJO GLOBAL (Evita estiramientos) */
+        /* ==================== 1. FONDO GLOBAL (Solucionado) ==================== */
         .global-bg {
             position: fixed;
             top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
+            width: 100%; height: 100%;
+            /* Capa 0: Se dibuja primero, encima del color negro del body */
+            z-index: 0; 
+            /* Filtro oscuro para que las letras se lean bien + Tu imagen */
+            background-image: linear-gradient(rgba(10, 0, 0, 0.6), rgba(30, 0, 5, 0.8)), 
                               url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
             background-size: cover; 
             background-position: center;
-            z-index: -2;
         }
 
-        /* ==================== EFECTO DE NIEVE ==================== */
+        /* ==================== 2. PARTÍCULAS (Solucionado) ==================== */
         .particles-container {
             position: fixed;
             top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100%; height: 100%;
             pointer-events: none;
-            z-index: -1; 
+            /* Capa 1: Por encima del fondo, pero debajo de las letras */
+            z-index: 1; 
         }
 
         .particle { position: absolute; background-color: rgba(212, 175, 55, 0.8); border-radius: 50%; animation: fall 10s linear infinite; }
@@ -58,31 +57,19 @@
         
         @keyframes fall { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(100vh); opacity: 0.6; } }
 
-        /* ==================== PANTALLA DE INICIO (El truco para la música) ==================== */
+        /* ==================== 3. PANTALLA DE INICIO (El truco para la música) ==================== */
         #welcomeOverlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.6s ease;
-            cursor: pointer;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease; cursor: pointer;
         }
 
         .tap-circle {
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            background: rgba(212, 175, 55, 0.2);
-            border: 2px solid #D4AF37;
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
+            width: 80px; height: 80px; border-radius: 50%; background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #D4AF37; display: flex; justify-content: center; align-items: center;
+            margin-bottom: 20px; animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
@@ -91,37 +78,42 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        #welcomeOverlay p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: #D4AF37;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
-        }
+        #welcomeOverlay p { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
 
-        /* ==================== CONTENEDOR PRINCIPAL (Anti-estiramiento) ==================== */
+        /* ==================== 4. CONTENEDOR PRINCIPAL (100% PANTALLA) ==================== */
         .main-wrapper {
-            width: 100%;
-            max-width: 450px; /* Aquí está la magia: nunca será más ancho que esto */
-            margin: 0 auto; /* Lo centra en la pantalla */
-            min-height: 100vh;
             position: relative;
-            padding: 20px 15px;
-            z-index: 10;
+            /* Capa 2: Por encima del fondo y las partículas */
+            z-index: 2; 
+            width: 100%; /* Ocupa el 100% de la pantalla del celular */
+            min-height: 100vh;
+            padding: 15px; /* Pequeño margen para que no pegue a los bordes */
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Solo se ajusta si alguien lo abre en una computadora o tablet grande */
+        @media (min-width: 768px) {
+            .main-wrapper { max-width: 500px; margin: 0 auto; padding: 30px; }
+        }
+
+        /* MARCO INTERNO (Fondo de cristal semi-transparente) */
         .inner-frame {
             position: relative;
-            padding: 40px 20px;
+            flex-grow: 1; /* Estira el marco hacia abajo */
+            padding: 35px 20px;
             text-align: center;
-            background: radial-gradient(circle at top, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 70%);
+            background: rgba(0, 0, 0, 0.35); /* Fondo oscuro muy sutil */
+            backdrop-filter: blur(3px); /* Efecto vidrio empañado suave */
+            -webkit-backdrop-filter: blur(3px);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 15px;
-            min-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Marcos de las esquinas */
+        /* Esquinas doradas */
         .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
         .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
@@ -131,29 +123,22 @@
 
         /* ==================== LOGO EMPRESA ==================== */
         .logo-empresa {
-            width: 90px; height: 90px;
-            margin: 0 auto 20px auto;
-            display: block;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #D4AF37;
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            width: 100px; height: 100px; margin: 0 auto 20px auto; display: block;
+            border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37;
+            background-color: #ffffff; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         /* ==================== BOTÓN DE MÚSICA ==================== */
         .music-toggle {
-            position: absolute;
-            top: 20px; right: 20px;
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: rgba(15, 5, 5, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.6);
+            position: fixed;
+            top: 25px; right: 25px;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(15, 5, 5, 0.85); border: 1px solid rgba(212, 175, 55, 0.6);
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer; z-index: 99;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            cursor: pointer; z-index: 99; backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
-        .music-icon { width: 18px; height: 18px; fill: #D4AF37; }
+        .music-icon { width: 20px; height: 20px; fill: #D4AF37; }
 
         /* ==================== TIPOGRAFÍA ==================== */
         .gold-text {
@@ -162,38 +147,35 @@
             filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
         }
 
-        .header-text { font-size: 0.75rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
-        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: 2px; }
-        .number-main { font-family: 'Playfair Display', serif; font-size: 7.5rem; font-weight: 800; margin: 10px 0; line-height: 1.1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
-        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 5px; }
-        .subtitle-text { font-size: 0.85rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 30px; }
+        .header-text { font-size: 0.8rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #ccc; margin-bottom: 10px; }
+        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 800; margin: 0; letter-spacing: 2px; }
+        .number-main { font-family: 'Playfair Display', serif; font-size: 8.5rem; font-weight: 800; margin: 0; line-height: 1.1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
+        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 10px; }
+        .subtitle-text { font-size: 0.9rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 30px; }
 
         /* ==================== TARJETA DE DETALLES ==================== */
         .glass-card {
-            background: rgba(15, 5, 5, 0.5);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            background: rgba(15, 5, 5, 0.4);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(212, 175, 55, 0.2); 
-            border-radius: 15px;
-            padding: 25px 20px;
-            margin-bottom: 25px;
+            border-radius: 15px; padding: 25px 20px; margin-bottom: 25px;
         }
 
-        .glass-card p { font-size: 0.85rem; line-height: 1.6; color: #ddd; margin: 0 0 25px 0; font-weight: 300; }
+        .glass-card p { font-size: 0.9rem; line-height: 1.6; color: #ddd; margin: 0 0 25px 0; font-weight: 300; }
         .detail-row { display: flex; align-items: center; margin-bottom: 20px; text-align: left; }
         .detail-row:last-child { margin-bottom: 0; }
 
         .icon-circle {
-            width: 40px; height: 40px; min-width: 40px;
-            border-radius: 50%; background: rgba(212, 175, 55, 0.05);
+            width: 42px; height: 42px; min-width: 42px;
+            border-radius: 50%; background: rgba(212, 175, 55, 0.08);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            display: flex; justify-content: center; align-items: center;
-            margin-right: 15px;
+            display: flex; justify-content: center; align-items: center; margin-right: 15px;
         }
         .icon-svg { width: 20px; height: 20px; fill: url(#goldGradient); }
 
-        .detail-info h4 { margin: 0; font-size: 0.65rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
-        .detail-info span { font-size: 0.9rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
-        .detail-info .sub-text { font-size: 0.75rem; font-weight: 300; color: #aaa; }
+        .detail-info h4 { margin: 0; font-size: 0.7rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
+        .detail-info span { font-size: 1rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
+        .detail-info .sub-text { font-size: 0.8rem; font-weight: 300; color: #aaa; }
 
         /* ==================== MAPA, BOTONES Y FIRMA ==================== */
         .map-container { margin-bottom: 25px; width: 100%; }
@@ -201,16 +183,16 @@
 
         .btn {
             display: flex; justify-content: center; align-items: center;
-            width: 100%; padding: 16px 0; border-radius: 30px;
-            font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
+            width: 100%; padding: 18px 0; border-radius: 30px;
+            font-weight: 600; text-transform: uppercase; font-size: 0.85rem;
             letter-spacing: 2px; text-decoration: none; margin-bottom: 15px;
             transition: all 0.3s ease;
         }
         .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
         .btn-primary { background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%); color: #000; font-weight: 700; border: none; }
         
-        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
-        .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
+        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
+        .footer-text { font-size: 0.75rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -235,20 +217,20 @@
 
     <div id="welcomeOverlay">
         <div class="tap-circle">
-            <svg style="width:30px; height:30px; fill:#D4AF37;" viewBox="0 0 24 24"><path d="M21 11.01L3 11v2h18zM3 16h12v2H3zM21 6H3v2h18z"/></svg>
+            <svg style="width:35px; height:35px; fill:#D4AF37;" viewBox="0 0 24 24"><path d="M21 11.01L3 11v2h18zM3 16h12v2H3zM21 6H3v2h18z"/></svg>
         </div>
         <p>Tocar para abrir<br>la invitación</p>
+    </div>
+
+    <div class="music-toggle" id="musicBtn">
+        <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="iconPause" class="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </div>
 
     <div class="main-wrapper">
         <div class="inner-frame">
             <div class="corner-tr"></div>
             <div class="corner-bl"></div>
-
-            <div class="music-toggle" id="musicBtn">
-                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            </div>
 
             <img src="image/logo.png" alt="Logo Empresa" class="logo-empresa">
             
@@ -327,18 +309,14 @@
             const iconPlay = document.getElementById("iconPlay");
             const iconPause = document.getElementById("iconPause");
 
-            // Al tocar la pantalla de bienvenida
+            // Al tocar la pantalla de bienvenida (Inicia el audio)
             overlay.addEventListener('click', function() {
-                // Iniciar audio
                 audio.play();
                 iconPlay.style.display = "none";
                 iconPause.style.display = "block";
                 
-                // Desaparecer overlay suavemente
                 overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 600); // 600ms coinciden con la transición CSS
+                setTimeout(() => { overlay.style.display = 'none'; }, 600);
             });
 
             // Botón de pausar/reproducir dentro de la invitación
