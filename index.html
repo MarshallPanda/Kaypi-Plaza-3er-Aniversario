@@ -15,7 +15,7 @@
 
         body, html {
             width: 100%;
-            min-height: 100vh;
+            height: 100%;
             background-color: #050505;
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
@@ -23,46 +23,26 @@
             overflow-x: hidden;
         }
 
-        /* ===== DISEÑO 100% PANTALLA COMPLETA ===== */
-        .phone-container {
-            width: 100vw;
-            min-height: 100vh;
-            position: relative;
+        /* FONDO FIJO GLOBAL (Evita estiramientos) */
+        .global-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             background-image: linear-gradient(rgba(10, 0, 0, 0.75), rgba(30, 0, 5, 0.85)), 
                               url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
             background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Diseño para PC (Solo pantallas muy grandes) */
-        @media (min-width: 1024px) {
-            body {
-                display: flex; justify-content: center; align-items: center;
-                background-color: #111;
-            }
-            .phone-container {
-                width: 450px; 
-                height: 90vh; 
-                min-height: auto;
-                border-radius: 40px;
-                border: 12px solid #000;
-                box-shadow: 0 30px 60px rgba(0,0,0,0.9);
-                overflow-y: auto;
-            }
+            background-position: center;
+            z-index: -2;
         }
 
         /* ==================== EFECTO DE NIEVE ==================== */
         .particles-container {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 100vw; height: 100vh;
             pointer-events: none;
-            z-index: 1; 
+            z-index: -1; 
         }
-        @media (min-width: 1024px) { .particles-container { position: absolute; } }
 
         .particle { position: absolute; background-color: rgba(212, 175, 55, 0.8); border-radius: 50%; animation: fall 10s linear infinite; }
         .particle:nth-of-type(1) { width: 3px; height: 3px; left: 10%; animation-delay: 0s; background-color: #FFE066; }
@@ -78,18 +58,70 @@
         
         @keyframes fall { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(100vh); opacity: 0.6; } }
 
-        /* ==================== CONTENIDO PRINCIPAL ==================== */
-        .inner-frame {
-            position: relative;
-            flex-grow: 1;
-            margin: 15px; 
-            padding: 40px 20px;
-            text-align: center;
-            background: radial-gradient(circle at top, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            z-index: 2; 
+        /* ==================== PANTALLA DE INICIO (El truco para la música) ==================== */
+        #welcomeOverlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease;
+            cursor: pointer;
         }
 
+        .tap-circle {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #D4AF37;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        #welcomeOverlay p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #D4AF37;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* ==================== CONTENEDOR PRINCIPAL (Anti-estiramiento) ==================== */
+        .main-wrapper {
+            width: 100%;
+            max-width: 450px; /* Aquí está la magia: nunca será más ancho que esto */
+            margin: 0 auto; /* Lo centra en la pantalla */
+            min-height: 100vh;
+            position: relative;
+            padding: 20px 15px;
+            z-index: 10;
+        }
+
+        .inner-frame {
+            position: relative;
+            padding: 40px 20px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 70%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            min-height: calc(100vh - 40px);
+        }
+
+        /* Marcos de las esquinas */
         .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
         .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
         .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
@@ -99,31 +131,29 @@
 
         /* ==================== LOGO EMPRESA ==================== */
         .logo-empresa {
-            width: 100px; 
-            height: 100px;
+            width: 90px; height: 90px;
             margin: 0 auto 20px auto;
             display: block;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #D4AF37;
             background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         /* ==================== BOTÓN DE MÚSICA ==================== */
         .music-toggle {
-            position: fixed;
-            top: 25px; right: 25px;
-            width: 45px; height: 45px;
+            position: absolute;
+            top: 20px; right: 20px;
+            width: 40px; height: 40px;
             border-radius: 50%;
             background: rgba(15, 5, 5, 0.8);
             border: 1px solid rgba(212, 175, 55, 0.6);
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer; z-index: 99; backdrop-filter: blur(5px);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            cursor: pointer; z-index: 99;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
-        @media (min-width: 1024px) { .music-toggle { position: absolute; } }
-        .music-icon { width: 20px; height: 20px; fill: #D4AF37; }
+        .music-icon { width: 18px; height: 18px; fill: #D4AF37; }
 
         /* ==================== TIPOGRAFÍA ==================== */
         .gold-text {
@@ -132,20 +162,20 @@
             filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
         }
 
-        .header-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
+        .header-text { font-size: 0.75rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #ccc; margin-bottom: 15px; }
         .brand-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: 2px; }
-        .number-main { font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 800; margin: 0; line-height: 1.1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
+        .number-main { font-family: 'Playfair Display', serif; font-size: 7.5rem; font-weight: 800; margin: 10px 0; line-height: 1.1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
         .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 5px; }
         .subtitle-text { font-size: 0.85rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 30px; }
 
         /* ==================== TARJETA DE DETALLES ==================== */
         .glass-card {
             background: rgba(15, 5, 5, 0.5);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2); 
-            border-radius: 20px;
-            padding: 25px 15px;
-            margin-bottom: 30px;
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
         }
 
         .glass-card p { font-size: 0.85rem; line-height: 1.6; color: #ddd; margin: 0 0 25px 0; font-weight: 300; }
@@ -166,7 +196,7 @@
         .detail-info .sub-text { font-size: 0.75rem; font-weight: 300; color: #aaa; }
 
         /* ==================== MAPA, BOTONES Y FIRMA ==================== */
-        .map-container { margin-bottom: 30px; width: 100%; }
+        .map-container { margin-bottom: 25px; width: 100%; }
         .map-image { width: 100%; height: 160px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.4); margin-bottom: 15px; display: none; }
 
         .btn {
@@ -174,16 +204,19 @@
             width: 100%; padding: 16px 0; border-radius: 30px;
             font-weight: 600; text-transform: uppercase; font-size: 0.8rem;
             letter-spacing: 2px; text-decoration: none; margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
         .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
         .btn-primary { background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%); color: #000; font-weight: 700; border: none; }
-        .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
+        
+        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
+        .footer-text { font-size: 0.7rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop autoplay preload="auto">
-        <source src="music/audio2.mp4" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/audio1.mp4" type="audio/mpeg">
     </audio>
 
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
@@ -194,12 +227,20 @@
         </linearGradient>
     </svg>
 
-    <div class="phone-container">
-        <div class="particles-container">
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="global-bg"></div>
+    <div class="particles-container">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <div id="welcomeOverlay">
+        <div class="tap-circle">
+            <svg style="width:30px; height:30px; fill:#D4AF37;" viewBox="0 0 24 24"><path d="M21 11.01L3 11v2h18zM3 16h12v2H3zM21 6H3v2h18z"/></svg>
         </div>
-        
+        <p>Tocar para abrir<br>la invitación</p>
+    </div>
+
+    <div class="main-wrapper">
         <div class="inner-frame">
             <div class="corner-tr"></div>
             <div class="corner-bl"></div>
@@ -265,9 +306,7 @@
                 Confirmar Asistencia
             </a>
 
-            <div style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px;">
-                Atentamente: Oriana Gutiérrez
-            </div>
+            <div class="firma-text">Atentamente: Oriana Gutiérrez</div>
 
             <div class="footer-text">Dress Code: Formal</div>
         </div>
@@ -275,53 +314,41 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // MAPA
+            // Lógica para imagen de mapa
             const img = document.getElementById("mapImage");
             const src = img.getAttribute("src").trim();
             if (src !== "") { img.style.display = "block"; }
             img.onerror = function() { this.style.display = "none"; };
 
-            // MÚSICA Y TRUCO DE AUTOPLAY
-            const audio = document.getElementById("bgMusic");
-            const btn = document.getElementById("musicBtn");
+            // Lógica de Audio y Pantalla de Inicio
+            const overlay = document.getElementById('welcomeOverlay');
+            const audio = document.getElementById('bgMusic');
+            const btnMusic = document.getElementById("musicBtn");
             const iconPlay = document.getElementById("iconPlay");
             const iconPause = document.getElementById("iconPause");
-            let userPaused = false; // Variable para saber si el usuario lo pausó a propósito
 
-            // Intento inicial de reproducción (Si el navegador lo permite)
-            let playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Autoplay funcionó
-                    iconPlay.style.display = "none";
-                    iconPause.style.display = "block";
-                }).catch(error => {
-                    // Autoplay fue bloqueado. Mostramos botón de play.
-                    iconPlay.style.display = "block";
-                    iconPause.style.display = "none";
-                });
-            }
+            // Al tocar la pantalla de bienvenida
+            overlay.addEventListener('click', function() {
+                // Iniciar audio
+                audio.play();
+                iconPlay.style.display = "none";
+                iconPause.style.display = "block";
+                
+                // Desaparecer overlay suavemente
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 600); // 600ms coinciden con la transición CSS
+            });
 
-            // TRUCO: Reproducir al primer toque en la pantalla
-            document.body.addEventListener('click', function() {
-                if (audio.paused && !userPaused) {
-                    audio.play();
-                    iconPlay.style.display = "none";
-                    iconPause.style.display = "block";
-                }
-            }, { once: true }); // Solo se ejecuta la primera vez que tocan
-
-            // Lógica del botón de la música
-            btn.addEventListener("click", function(event) {
-                event.stopPropagation(); // Evita que interfiera con el truco de arriba
+            // Botón de pausar/reproducir dentro de la invitación
+            btnMusic.addEventListener("click", function() {
                 if (audio.paused) {
                     audio.play();
-                    userPaused = false;
                     iconPlay.style.display = "none";
                     iconPause.style.display = "block";
                 } else {
                     audio.pause();
-                    userPaused = true; // Guardamos que el usuario quiso pausarla
                     iconPlay.style.display = "block";
                     iconPause.style.display = "none";
                 }
