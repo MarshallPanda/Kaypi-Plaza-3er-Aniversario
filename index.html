@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación VIP 3er Aniversario - Kaypi Plaza</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
     <style>
@@ -12,35 +12,26 @@
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #000000; /* Fondo base negro */
+            background-color: #000000;
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* ==================== 1. FONDO GLOBAL (Solucionado) ==================== */
+        /* ==================== 1. FONDO GLOBAL ==================== */
         .global-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            /* Capa 0: Se dibuja primero, encima del color negro del body */
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; 
-            /* Filtro oscuro para que las letras se lean bien + Tu imagen */
             background-image: linear-gradient(rgba(10, 0, 0, 0.6), rgba(30, 0, 5, 0.8)), 
                               url('image/Gemini_Generated_Image_iv2a7div2a7div2a.png');
-            background-size: cover; 
-            background-position: center;
+            background-size: cover; background-position: center;
         }
 
-        /* ==================== 2. PARTÍCULAS (Solucionado) ==================== */
+        /* ==================== 2. PARTÍCULAS ==================== */
         .particles-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            /* Capa 1: Por encima del fondo, pero debajo de las letras */
-            z-index: 1; 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 1; 
         }
 
         .particle { position: absolute; background-color: rgba(212, 175, 55, 0.8); border-radius: 50%; animation: fall 10s linear infinite; }
@@ -57,11 +48,10 @@
         
         @keyframes fall { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(100vh); opacity: 0.6; } }
 
-        /* ==================== 3. PANTALLA DE INICIO (El truco para la música) ==================== */
+        /* ==================== 3. PANTALLA DE INICIO (AUDIO) ==================== */
         #welcomeOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: opacity 0.6s ease; cursor: pointer;
         }
@@ -78,121 +68,115 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        #welcomeOverlay p { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+        #welcomeOverlay p { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
 
-        /* ==================== 4. CONTENEDOR PRINCIPAL (100% PANTALLA) ==================== */
+        /* ==================== 4. CONTENEDOR PRINCIPAL EXPANSIVO ==================== */
         .main-wrapper {
-            position: relative;
-            /* Capa 2: Por encima del fondo y las partículas */
-            z-index: 2; 
-            width: 100%; /* Ocupa el 100% de la pantalla del celular */
+            position: relative; z-index: 2; 
+            width: 100%; /* Forzamos el 100% */
             min-height: 100vh;
-            padding: 15px; /* Pequeño margen para que no pegue a los bordes */
-            display: flex;
-            flex-direction: column;
+            padding: 15px 12px; /* Margen exterior muy fino para que ocupe todo */
+            display: flex; flex-direction: column;
         }
 
-        /* Solo se ajusta si alguien lo abre en una computadora o tablet grande */
-        @media (min-width: 768px) {
-            .main-wrapper { max-width: 500px; margin: 0 auto; padding: 30px; }
+        /* Solo limitamos el ancho si es una pantalla gigante de computadora */
+        @media (min-width: 1024px) {
+            .main-wrapper { max-width: 600px; margin: 0 auto; padding: 30px; }
         }
 
-        /* MARCO INTERNO (Fondo de cristal semi-transparente) */
+        /* MARCO INTERNO (Abarca todo el ancho disponible) */
         .inner-frame {
-            position: relative;
-            flex-grow: 1; /* Estira el marco hacia abajo */
-            padding: 35px 20px;
+            position: relative; flex-grow: 1; 
+            width: 100%; /* Ahora sí ocupa todo el espacio */
+            padding: 40px 15px; /* Más espacio vertical, menos horizontal */
             text-align: center;
-            background: rgba(0, 0, 0, 0.35); /* Fondo oscuro muy sutil */
-            backdrop-filter: blur(3px); /* Efecto vidrio empañado suave */
-            -webkit-backdrop-filter: blur(3px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            background: rgba(5, 0, 0, 0.45); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* Esquinas doradas */
-        .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
+        /* Esquinas doradas empujadas a los bordes */
+        .inner-frame::before, .inner-frame::after { content: ''; position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.8; pointer-events: none; }
         .inner-frame::before { top: 15px; left: 15px; border-width: 2px 0 0 2px; }
         .inner-frame::after { bottom: 15px; right: 15px; border-width: 0 2px 2px 0; }
-        .corner-tr, .corner-bl { position: absolute; width: 30px; height: 30px; border-color: #D4AF37; border-style: solid; opacity: 0.7; pointer-events: none; }
+        .corner-tr, .corner-bl { position: absolute; width: 40px; height: 40px; border-color: #D4AF37; border-style: solid; opacity: 0.8; pointer-events: none; }
         .corner-tr { top: 15px; right: 15px; border-width: 2px 2px 0 0; }
         .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 2px 2px; }
 
         /* ==================== LOGO EMPRESA ==================== */
         .logo-empresa {
-            width: 100px; height: 100px; margin: 0 auto 20px auto; display: block;
+            width: 110px; height: 110px; margin: 0 auto 20px auto; display: block;
             border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37;
             background-color: #ffffff; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         /* ==================== BOTÓN DE MÚSICA ==================== */
         .music-toggle {
-            position: fixed;
-            top: 25px; right: 25px;
+            position: absolute; top: 25px; right: 25px;
             width: 45px; height: 45px; border-radius: 50%;
             background: rgba(15, 5, 5, 0.85); border: 1px solid rgba(212, 175, 55, 0.6);
             display: flex; justify-content: center; align-items: center;
             cursor: pointer; z-index: 99; backdrop-filter: blur(5px);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
-        .music-icon { width: 20px; height: 20px; fill: #D4AF37; }
+        .music-icon { width: 22px; height: 22px; fill: #D4AF37; }
 
-        /* ==================== TIPOGRAFÍA ==================== */
+        /* ==================== TIPOGRAFÍA (MÁS GRANDE Y PROPORCIONADA) ==================== */
         .gold-text {
             background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
             color: transparent; -webkit-background-clip: text; background-clip: text;
             filter: drop-shadow(0 2px 4px rgba(212,175,55,0.2));
         }
 
-        .header-text { font-size: 0.8rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #ccc; margin-bottom: 10px; }
-        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 800; margin: 0; letter-spacing: 2px; }
-        .number-main { font-family: 'Playfair Display', serif; font-size: 8.5rem; font-weight: 800; margin: 0; line-height: 1.1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
-        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 10px; }
-        .subtitle-text { font-size: 0.9rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 30px; }
+        .header-text { font-size: 0.85rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #ccc; margin-bottom: 10px; }
+        .brand-name { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800; margin: 0; letter-spacing: 2px; line-height: 1.1; }
+        .number-main { font-family: 'Playfair Display', serif; font-size: 10rem; font-weight: 800; margin: 10px 0; line-height: 1; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.4)); }
+        .anniversary-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 10px; }
+        .subtitle-text { font-size: 1rem; font-style: italic; font-family: 'Playfair Display', serif; color: #D4AF37; margin-bottom: 35px; }
 
-        /* ==================== TARJETA DE DETALLES ==================== */
+        /* ==================== TARJETA DE DETALLES (ANCHO COMPLETO) ==================== */
         .glass-card {
-            background: rgba(15, 5, 5, 0.4);
+            width: 100%; /* Forzamos a que llene la pantalla a lo ancho */
+            background: rgba(15, 5, 5, 0.5);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.2); 
-            border-radius: 15px; padding: 25px 20px; margin-bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+            border-radius: 18px; padding: 30px 20px; margin-bottom: 30px;
         }
 
-        .glass-card p { font-size: 0.9rem; line-height: 1.6; color: #ddd; margin: 0 0 25px 0; font-weight: 300; }
-        .detail-row { display: flex; align-items: center; margin-bottom: 20px; text-align: left; }
+        .glass-card p { font-size: 1rem; line-height: 1.6; color: #ddd; margin: 0 0 30px 0; font-weight: 300; }
+        .detail-row { display: flex; align-items: center; margin-bottom: 25px; text-align: left; }
         .detail-row:last-child { margin-bottom: 0; }
 
         .icon-circle {
-            width: 42px; height: 42px; min-width: 42px;
+            width: 48px; height: 48px; min-width: 48px;
             border-radius: 50%; background: rgba(212, 175, 55, 0.08);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            display: flex; justify-content: center; align-items: center; margin-right: 15px;
+            display: flex; justify-content: center; align-items: center; margin-right: 18px;
         }
-        .icon-svg { width: 20px; height: 20px; fill: url(#goldGradient); }
+        .icon-svg { width: 24px; height: 24px; fill: url(#goldGradient); }
 
-        .detail-info h4 { margin: 0; font-size: 0.7rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
-        .detail-info span { font-size: 1rem; font-weight: 600; color: #fff; display: block; margin-top: 3px; }
-        .detail-info .sub-text { font-size: 0.8rem; font-weight: 300; color: #aaa; }
+        .detail-info h4 { margin: 0; font-size: 0.8rem; color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
+        .detail-info span { font-size: 1.1rem; font-weight: 600; color: #fff; display: block; margin-top: 4px; }
+        .detail-info .sub-text { font-size: 0.85rem; font-weight: 300; color: #aaa; }
 
         /* ==================== MAPA, BOTONES Y FIRMA ==================== */
         .map-container { margin-bottom: 25px; width: 100%; }
-        .map-image { width: 100%; height: 160px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.4); margin-bottom: 15px; display: none; }
+        .map-image { width: 100%; height: 180px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.4); margin-bottom: 15px; display: none; }
 
         .btn {
             display: flex; justify-content: center; align-items: center;
-            width: 100%; padding: 18px 0; border-radius: 30px;
-            font-weight: 600; text-transform: uppercase; font-size: 0.85rem;
-            letter-spacing: 2px; text-decoration: none; margin-bottom: 15px;
+            width: 100%; /* Estiramos los botones de extremo a extremo */
+            padding: 20px 0; border-radius: 35px;
+            font-weight: 600; text-transform: uppercase; font-size: 0.95rem;
+            letter-spacing: 2px; text-decoration: none; margin-bottom: 18px;
             transition: all 0.3s ease;
         }
         .btn-map { background: rgba(0,0,0,0.6); color: #D4AF37; border: 1px solid #D4AF37; }
         .btn-primary { background: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%); color: #000; font-weight: 700; border: none; }
         
-        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
-        .footer-text { font-size: 0.75rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
+        .firma-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #D4AF37; font-style: italic; margin-top: 25px; margin-bottom: 5px; }
+        .footer-text { font-size: 0.8rem; color: #777; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -222,15 +206,15 @@
         <p>Tocar para abrir<br>la invitación</p>
     </div>
 
-    <div class="music-toggle" id="musicBtn">
-        <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="iconPause" class="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    </div>
-
     <div class="main-wrapper">
         <div class="inner-frame">
             <div class="corner-tr"></div>
             <div class="corner-bl"></div>
+
+            <div class="music-toggle" id="musicBtn">
+                <svg id="iconPlay" class="music-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="iconPause" class="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </div>
 
             <img src="image/logo.png" alt="Logo Empresa" class="logo-empresa">
             
@@ -279,7 +263,7 @@
                 <img id="mapImage" class="map-image" src="" alt="Croquis de ubicación">
                 
                 <a href="URL_DE_GOOGLE_MAPS_AQUI" target="_blank" class="btn btn-map">
-                    <img src="image/google-logo-new-maps.webp" style="width: 22px; margin-right: 10px;" alt="Maps Logo">
+                    <img src="image/google-logo-new-maps.webp" style="width: 24px; margin-right: 12px;" alt="Maps Logo">
                     Ver en Mapa
                 </a>
             </div>
@@ -309,7 +293,6 @@
             const iconPlay = document.getElementById("iconPlay");
             const iconPause = document.getElementById("iconPause");
 
-            // Al tocar la pantalla de bienvenida (Inicia el audio)
             overlay.addEventListener('click', function() {
                 audio.play();
                 iconPlay.style.display = "none";
@@ -319,7 +302,6 @@
                 setTimeout(() => { overlay.style.display = 'none'; }, 600);
             });
 
-            // Botón de pausar/reproducir dentro de la invitación
             btnMusic.addEventListener("click", function() {
                 if (audio.paused) {
                     audio.play();
@@ -335,4 +317,4 @@
     </script>
 
 </body>
-</html>
+</html>A
